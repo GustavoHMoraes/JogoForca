@@ -4,7 +4,7 @@ var acertos = 0;
 var tentativas = "";
 palavraSecreta = palavras[Math.floor(Math.random()*6)];
 
-var c = document.getElementById("forca");
+var c = document.getElementById('forca');
 var ctx = c.getContext("2d");
 
 desenhaForca();
