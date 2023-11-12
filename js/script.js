@@ -1,24 +1,27 @@
+var c = document.getElementById('forca');
+var ctx = c.getContext("2d");
+
 const palavras = ["BANANA", "CAJU", "MANGA", "MORANGO", "KIWI","TAMARINDO"];
 var erros = 0;
 var acertos = 0;
 var tentativas = "";
-palavraSecreta = palavras[Math.floor(Math.random()*6)];
+palavraSecreta = palavras[Math.floor(Math.random() * 6)];
 
-var c = document.getElementById('forca');
-var ctx = c.getContext("2d");
+var terminou = false;
 
 desenhaForca();
 desenhaBarra();
 desenhaApoio();
 desenhaTracos();
 
-window.onkeypress = teclaPrecionada;
+window.onkeypress = teclaPressionada;
 
-function teclaPrecionada() {
+function teclaPressionada() {
     if (!tentativas.includes(event.key) && palavraSecreta.includes((event.key).toUpperCase())) {
         adicionaTentativa();
         for (var i=0; 1 < palavraSecreta.length; i++){
             if(palavraSecreta[i]==(event.key).toUpperCase()) {
+                ctx.fillStyle = "#000";
                 ctx.font="35px Arial"
                 ctx.fillText((event.key).toUpperCase(), 20 + (35*i), 200)
                 acertos++;
@@ -35,22 +38,23 @@ function teclaPrecionada() {
 function adicionaTentativa() {
     if (!tentativas.includes(event.key)){
         tentativas=tentativas+event.key;
+        ctx.fillStyle = "#000";
         ctx.font="20px Arial";
         ctx.fillText("Tentativas: "+ tentativas.toUpperCase(), 20,200);
     }
 }
 function verificaFimJogo() {
     if (erros>=6) {
+        terminou = true;
+        ctx.fillStyle = "#000";
         ctx.font="20px Arial";
         ctx.fillText("FIM DE JOGO! A palavra era: "+palavraSecreta, 200, 100);
-        window.onkeypress = null;
-        return;
     }
     if (acertos == palavraSecreta.length) {
+        terminou = true;
+        ctx.fillStyle = "#000";
         ctx.font="20px Arial";
         ctx.fillText("Você ganhou!", 200, 100);
-        window.onkeypress = null;
-        return;
     }
 }
 
