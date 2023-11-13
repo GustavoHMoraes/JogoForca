@@ -5,25 +5,18 @@ const palavras = ["BANANA", "CAJU", "MANGA", "MORANGO", "KIWI","TAMARINDO"];
 var erros = 0;
 var acertos = 0;
 var tentativas = "";
-palavraSecreta = palavras[Math.floor(Math.random() * 6)];
+var palavraSecreta = palavras[Math.floor(Math.random() * 6)];
 
 var terminou = false;
-
-desenhaForca();
-desenhaBarra();
-desenhaApoio();
-desenhaTracos();
-
-window.onkeypress = teclaPressionada;
 
 function teclaPressionada() {
     if (!tentativas.includes(event.key) && palavraSecreta.includes((event.key).toUpperCase())) {
         adicionaTentativa();
-        for (var i=0; 1 < palavraSecreta.length; i++){
+        for (var i=0; i < palavraSecreta.length; i++){
             if(palavraSecreta[i]==(event.key).toUpperCase()) {
                 ctx.fillStyle = "#000";
-                ctx.font="35px Arial"
-                ctx.fillText((event.key).toUpperCase(), 20 + (35*i), 200)
+                ctx.font="35px Arial";
+                ctx.fillText((event.key).toUpperCase(), 20 + (35*i), 200);
                 acertos++;
             }
         }
@@ -40,7 +33,7 @@ function adicionaTentativa() {
         tentativas=tentativas+event.key;
         ctx.fillStyle = "#000";
         ctx.font="20px Arial";
-        ctx.fillText("Tentativas: "+ tentativas.toUpperCase(), 20,200);
+        ctx.fillText("Tentativas: "+ tentativas.toUpperCase(), 20,250);
     }
 }
 function verificaFimJogo() {
@@ -139,3 +132,16 @@ function desenhaPernaDir() {
     ctx.lineTo(70,90);
     ctx.stroke();
 }
+
+document.addEventListener("keydown", function(event){
+    if(event.keyCode >= 65 && event.keyCode <= 90){
+        if(terminou == false){
+            teclaPressionada();
+        }
+    }
+});
+
+desenhaForca();
+desenhaBarra();
+desenhaApoio();
+desenhaTracos();
